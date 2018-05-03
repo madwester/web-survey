@@ -1,0 +1,68 @@
+﻿/*---------------------------
+    GENERAL
+---------------------------*/
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+}
+.body-content {
+    margin: 70px 50px;
+}
+.defaultBtnAit {
+    font-family: 'Oswald', sans-serif;
+    padding: 10px 30px;
+    margin: 15px;
+    text-transform: uppercase;
+}
+.blue {
+    background-color: #75D6D4;
+}
+.yellow {
+    background-color: #E7FA92;
+}
+
+h1 {
+    font-family: 'Oswald', sans-serif;
+    text-transform: uppercase;
+    margin: 0 0 30px 0;
+}
+
+/*---------------------------
+    NAVIGATION
+---------------------------*/
+.navbar {
+    padding: 20px 30px;
+    background-color: #E7FA92;
+    border: 0;
+}
+.navbar img {
+    width: 20%;
+    height: 20%;
+}
+
+/*---------------------------
+    HOME PAGE
+---------------------------*/
+
+.column {
+    margin: 50px;
+}
+
+/*---------------------------
+    QUESTION TEMPLATE
+---------------------------*/
+
+#questionLabel {
+    text-transform: uppercase;
+    font-family: 'Oswald', sans-serif;
+}
+#radioList input{
+    
+}
+.questionRow {
+    background-color: #EFEFEF;
+    padding: 50px;
+}
+
+
