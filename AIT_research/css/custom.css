@@ -32,7 +32,7 @@ h1 {
     NAVIGATION
 ---------------------------*/
 .navbar {
-    padding: 20px 30px;
+    padding: 20px 40px;
     background-color: #E7FA92;
     border: 0;
 }
@@ -40,7 +40,17 @@ h1 {
     width: 20%;
     height: 20%;
 }
-
+.navigationDiv {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.navTitle {
+    font-size: 1.3em;
+    font-family: 'Oswald', sans-serif;
+    text-transform: uppercase;
+    margin: 0;
+}
 /*---------------------------
     HOME PAGE
 ---------------------------*/
@@ -65,4 +75,26 @@ h1 {
     padding: 50px;
 }
 
+/*---------------------------
+    SEARCH PAGE
+---------------------------*/
 
+.searchDiv {
+    margin: 40px 0;
+}
+.searchPageButton {
+    width: 100%;
+    padding: 10px;
+    text-align: left;
+    text-transform: uppercase;
+    font-family: 'Oswald', sans-serif;
+    border: 0;
+    border-radius: 5px 5px 0 0;
+    margin: 7px 0;
+}
+.foldOutContainer {
+    margin-top: -7px;
+    padding: 40px;
+    background-color: #EFEFEF;
+    border-radius: 0 0 5px 5px;
+}

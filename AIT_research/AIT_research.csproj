@@ -250,6 +250,7 @@
     <Content Include="Default.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="searchPage.aspx" />
     <Content Include="Site.Master" />
     <Content Include="TextType.ascx" />
     <Content Include="ViewSwitcher.ascx" />
@@ -422,6 +423,13 @@
     </Compile>
     <Compile Include="RadioType.ascx.designer.cs">
       <DependentUpon>RadioType.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="searchPage.aspx.cs">
+      <DependentUpon>searchPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="searchPage.aspx.designer.cs">
+      <DependentUpon>searchPage.aspx</DependentUpon>
     </Compile>
     <Compile Include="Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>
