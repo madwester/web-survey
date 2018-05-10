@@ -18,8 +18,8 @@ namespace AIT_research
 
         public RadioButtonList RadioList
         {
-            get { return radioList; }
-            set { radioList = value; }
+            get { return questionRadioList; }
+            set { questionRadioList = value; }
         }
 
         protected void Page_Load(object sender, EventArgs e)

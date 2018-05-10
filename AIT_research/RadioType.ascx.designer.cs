@@ -22,12 +22,12 @@ namespace AIT_research {
         protected global::System.Web.UI.WebControls.Label questionLabel;
         
         /// <summary>
-        /// radioList control.
+        /// questionRadioList control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButtonList radioList;
+        protected global::System.Web.UI.WebControls.RadioButtonList questionRadioList;
     }
 }

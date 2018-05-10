@@ -18,8 +18,8 @@ namespace AIT_research
 
         public CheckBoxList CheckList
         {
-            get { return checkList; }
-            set { checkList = value; }
+            get { return questionCheckBoxList; }
+            set { questionCheckBoxList = value; }
         }
 
         protected void Page_Load(object sender, EventArgs e)

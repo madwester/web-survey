@@ -214,6 +214,7 @@
     </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="images\logo.png" />
+    <Content Include="loginStaff.aspx" />
     <Content Include="question.aspx" />
     <Content Include="RadioType.ascx" />
     <Content Include="Scripts\ai.0.22.9-build00167.js" />
@@ -398,6 +399,7 @@
     <Compile Include="Contact.aspx.designer.cs">
       <DependentUpon>Contact.aspx</DependentUpon>
     </Compile>
+    <Compile Include="DatabaseHelper.cs" />
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -407,6 +409,13 @@
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="loginStaff.aspx.cs">
+      <DependentUpon>loginStaff.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="loginStaff.aspx.designer.cs">
+      <DependentUpon>loginStaff.aspx</DependentUpon>
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

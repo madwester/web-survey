@@ -13,12 +13,21 @@ namespace AIT_research {
     public partial class question {
         
         /// <summary>
-        /// questionTemplate control.
+        /// questionPlaceholder control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.PlaceHolder questionTemplate;
+        protected global::System.Web.UI.WebControls.PlaceHolder questionPlaceholder;
+        
+        /// <summary>
+        /// selectedAnswerBulletedList control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.BulletedList selectedAnswerBulletedList;
     }
 }

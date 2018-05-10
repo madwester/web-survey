@@ -1,7 +1,7 @@
 ﻿<%@ Page Title="Home Page" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="AIT_research._Default" %>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
-    <div class="container">
+    <div class="container containerHomePage">
         <div class="row">
             <div class="col-md-12 text-center column">
                 <h1>Welcome to AIT research</h1>
@@ -10,12 +10,10 @@
             </div>
             <div class="col-md-12 text-center column">
                 <h4>Are you working at AIT Research and would like to login?</h4>
-                <button class="btn defaultBtnAit yellow">Login in staff</button>
+                <a href="loginStaff.aspx">
+                    <input type="button" class="defaultBtnAit yellow"value="Login as staff"/>
+                </a>
             </div>
         </div>
-    </div><ul class="nav nav-stacked">
-          <li role="presentation" class="active"><a href="#">Home</a></li>
-          <li role="presentation"><a href="#">Profile</a></li>
-          <li role="presentation"><a href="#">Messages</a></li>
-        </ul>
+    </div>
 </asp:Content>

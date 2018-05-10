@@ -7,13 +7,15 @@ body {
     font-family: 'Roboto', sans-serif;
 }
 .body-content {
-    margin: 70px 50px;
+    margin: 70px auto;
 }
 .defaultBtnAit {
     font-family: 'Oswald', sans-serif;
     padding: 10px 30px;
     margin: 15px;
     text-transform: uppercase;
+    border: 0;
+    border-radius: 5px;
 }
 .blue {
     background-color: #75D6D4;
@@ -58,6 +60,12 @@ h1 {
 .column {
     margin: 50px;
 }
+    .column h4 {
+        font-size: 1.2em;
+    }
+.containerHomePage {
+    margin: 70px auto;
+}
 
 /*---------------------------
     QUESTION TEMPLATE
@@ -97,4 +105,46 @@ h1 {
     padding: 40px;
     background-color: #EFEFEF;
     border-radius: 0 0 5px 5px;
+}
+
+/*---------------------------
+    LOGIN PAGE
+---------------------------*/
+
+.loginDiv {
+    width: 600px;
+    margin: 60px auto;
+    background-color: #EFEFEF;
+    text-align: center;
+    padding: 60px 100px;
+
+}
+.loginDiv img {
+    width: 200px;
+    height: auto;   
+    margin: 10px 0 15px 0;   
+}
+.loginDiv h2 {
+    text-transform: capitalize;
+    font-family: 'Oswald', sans-serif;
+    margin: 0 0 30px 0;
+    font-size: 1.9em;
+}
+.loginInputs {
+    display: flex;
+    flex-direction: column;
+    padding: 20px 60px;
+}
+.loginInputs input {
+    margin: 10px;
+    width: 100%;
+}
+.input {
+    padding: 10px;
+    border: 0;
+    border-radius: 5px;
+}
+.loginDiv a {
+    color: black;
+    margin: 30px 0 0 0;
 }

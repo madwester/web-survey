@@ -16,8 +16,8 @@ namespace AIT_research
         }
 
         public TextBox TextboxInputQuestion {
-            get { return textboxInputQuestion; }
-            set { textboxInputQuestion = value; }
+            get { return questionTextBox; }
+            set { questionTextBox = value; }
         }
 
     
