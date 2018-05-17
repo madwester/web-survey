@@ -217,6 +217,7 @@
     <Content Include="loginStaff.aspx" />
     <Content Include="question.aspx" />
     <Content Include="RadioType.ascx" />
+    <Content Include="Register.aspx" />
     <Content Include="Scripts\ai.0.22.9-build00167.js" />
     <Content Include="Scripts\ai.0.22.9-build00167.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -432,6 +433,13 @@
     </Compile>
     <Compile Include="RadioType.ascx.designer.cs">
       <DependentUpon>RadioType.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Register.aspx.cs">
+      <DependentUpon>Register.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Register.aspx.designer.cs">
+      <DependentUpon>Register.aspx</DependentUpon>
     </Compile>
     <Compile Include="searchPage.aspx.cs">
       <DependentUpon>searchPage.aspx</DependentUpon>

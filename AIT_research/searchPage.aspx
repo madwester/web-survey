@@ -2,11 +2,11 @@
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
     <div class="container-fluid searchDiv">
-        <input type="button" id="showAll" class="searchPageButton blue" value="show all respondants"/>
+        <input type="button" id="showAll" class="longButton blue" value="show all respondants"/>
     <div id="showAllDiv" class="foldOutContainer" style="display:none">
         hello
     </div>
-        <input type="button" id="searchFor" class="searchPageButton yellow" value="search for respondants"/>
+        <input type="button" id="searchFor" class="longButton yellow" value="search for respondants"/>
     <div id="searchForDiv" class="foldOutContainer" style="display:none">
         hello
     </div>

@@ -106,64 +106,6 @@ namespace AIT_research
         }
         protected void nextBtn_Click(object sender, EventArgs e)
         {
-            //lets try find checkbox question contorl in web page
-            CheckType checkTypeQuestion = (CheckType)questionPlaceholder.FindControl("checkTypeQuestion");
-            if (checkTypeQuestion != null)
-            {
-                //then its a checkbox question
-
-                //empty list of shown answers in bullet list
-                selectedAnswerBulletedList.Items.Clear();
-                foreach (ListItem item in checkTypeQuestion.CheckList.Items)
-                {
-                    if (item.Selected)
-                    {
-                        //TODO add answer to session or DB
-                        //TODO check if selected answers lead onto FOLLOW UP questions, if so, add to the list
-
-                        selectedAnswerBulletedList.Items.Add(item);
-                    }
-                }
-            }
-
-            //ok lets now try if its the radiotype question
-            RadioType radioTypeQuestion = (RadioType)questionPlaceholder.FindControl("radioTypeQuestion");
-            if (radioTypeQuestion != null)
-            {
-                //then its a radio question
-
-                //empty list of shown answers in bullet list
-                selectedAnswerBulletedList.Items.Clear();
-                foreach (ListItem item in radioTypeQuestion.RadioList.Items)
-                {
-                    if (item.Selected)
-                    {
-                        //TODO add answer to session or DB
-                        //TODO check if selected answers lead onto FOLLOW UP questions, if so, add to the list
-
-                        selectedAnswerBulletedList.Items.Add(item);
-                    }
-                }
-            //empty list 
-            }
-            //ok lets now try if its the texttype question
-            TextType textTypeQuestion = (TextType)questionPlaceholder.FindControl("textboxQuestionControl");
-            if (textTypeQuestion != null)
-            {
-                //to do add this answer to db or session
-
-                //empty list of shown answers in bullet list
-                selectedAnswerBulletedList.Items.Clear();
-
-                //add 1 item to show what we typed in
-                selectedAnswerBulletedList.Items.Add(new ListItem(textTypeQuestion.TextboxInputQuestion.Text, ""));
-            }
-
-            //creating a variable to check what current question is
-            int currentQuestion = GetCurrentQuestionNumber();
-
-            //getting connection from database helper class
-            SqlConnection connection = DatabaseHelper.GetConnection();
 
             //TODO check for follow up questions by checking selected answers against
             //db to see if there are any follow up questions setup or load up a list
@@ -176,12 +118,67 @@ namespace AIT_research
                 followUpQuestions = (List<Int32>)HttpContext.Current.Session["followUpQuestions"];
             }
 
+            //getting connection from database helper class
+            SqlConnection connection = DatabaseHelper.GetConnection();
+
+            //lets try find checkbox question contorl in web page
+            CheckType checkTypeQuestion = (CheckType)questionPlaceholder.FindControl("checkTypeQuestion");
+            if (checkTypeQuestion != null)
+            {
+                //then its a checkbox question
+         
+                foreach (ListItem item in checkTypeQuestion.CheckList.Items)
+                {
+                    if (item.Selected)
+                    {
+                        int optionID = Int32.Parse(item.Value);
+                        //TODO add answer to session or DB
+                        //TODO check if selected answers lead onto FOLLOW UP questions, if so, add to the list
+                        SqlCommand nextQuestionCommand = new SqlCommand("SELECT * FROM [option] WHERE optionID = "
+                            + optionID + " AND nextQuestion IS NOT NULL ", connection);
+                        SqlDataReader nextQuestionReader = nextQuestionCommand.ExecuteReader();
+                        while (nextQuestionReader.Read())
+                        {
+                            int nextQuestionItem = (int)nextQuestionReader["nextQuestion"];
+                            followUpQuestions.Add(nextQuestionItem);
+                        }
+                    }
+                }
+            }
+
+            //ok lets now try if its the radiotype question
+            RadioType radioTypeQuestion = (RadioType)questionPlaceholder.FindControl("radioTypeQuestion");
+            if (radioTypeQuestion != null)
+            {
+                //then its a radio question
+
+                foreach (ListItem item in radioTypeQuestion.RadioList.Items)
+                {
+                    if (item.Selected)
+                    {
+                        //TODO add answer to session or DB
+                        //TODO check if selected answers lead onto FOLLOW UP questions, if so, add to the list
+
+                    }
+                }
+            //empty list 
+            }
+            //ok lets now try if its the texttype question
+            TextType textTypeQuestion = (TextType)questionPlaceholder.FindControl("textboxQuestionControl");
+            if (textTypeQuestion != null)
+            {
+                //to do add this answer to db or session
+            }
+
+            //creating a variable to check what current question is
+            int currentQuestion = GetCurrentQuestionNumber();
+            
             //FOR TESTING ONLY, faking adding follow up qustions. aka dont do this in final assignment
             if (currentQuestion == 1) //hardcoded checks loses marks in assignment
             {
                 //add your follow up question ids to the list
-                followUpQuestions.Add(3);
-                followUpQuestions.Add(4);
+                //followUpQuestions.Add(3);
+                //followUpQuestions.Add(4);
             }
 
             //find out what the next questions should be:
@@ -207,7 +204,7 @@ namespace AIT_research
                     int nextQuestion = (int)reader["nextQuestionID"];
 
                     //set this as the current question in the session
-                    HttpContext.Current.Session["questionNumber"] = nextQuestion;
+                    HttpContext.Current.Session["questionID"] = nextQuestion;
 
                     //IF THERE IS FOLLOW UP QUESTIONS THOUGH, do them first.
                     if (followUpQuestions.Count > 0)

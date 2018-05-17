@@ -10,6 +10,4 @@
             </div>
         </div>
     </div>
-            <asp:BulletedList ID="selectedAnswerBulletedList" runat="server">
-        </asp:BulletedList>
 </asp:Content>

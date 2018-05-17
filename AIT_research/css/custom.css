@@ -28,7 +28,22 @@ h1 {
     text-transform: uppercase;
     margin: 0 0 30px 0;
 }
-
+.longButton {
+    width: 100%;
+    padding: 10px 20px;
+    text-align: left;
+    text-transform: uppercase;
+    font-family: 'Oswald', sans-serif;
+    border: 0;
+    border-radius: 5px 5px 0 0;
+    margin: 7px 0;
+    justify-content: space-between;
+    display: flex;
+    font-size: 18px;
+}
+.full {
+    width: 100%;
+}
 /*---------------------------
     NAVIGATION
 ---------------------------*/
@@ -113,16 +128,6 @@ label {
 .searchDiv {
     margin: 40px 0;
 }
-.searchPageButton {
-    width: 100%;
-    padding: 10px;
-    text-align: left;
-    text-transform: uppercase;
-    font-family: 'Oswald', sans-serif;
-    border: 0;
-    border-radius: 5px 5px 0 0;
-    margin: 7px 0;
-}
 .foldOutContainer {
     margin-top: -7px;
     padding: 40px;
@@ -170,4 +175,25 @@ label {
 .loginDiv a {
     color: black;
     margin: 30px 0 0 0;
+}
+
+/*---------------------------
+    REGSITER PAGE
+---------------------------*/
+.registerRow {
+    margin-bottom: 15px;
+}
+.registerDiv {
+    margin: 20px 0;
+    min-height: 700px;
+}
+.registerLabel {
+    margin: 0 0 10px 0;
+}
+.registerTextBox {
+    border: 0;
+    padding: 10px;
+    border-radius: 5px;
+    width: 100%;
+    margin-top: 5px;
 }
