@@ -30,9 +30,7 @@
                 <asp:TextBox class="registerTextBox" runat="server"></asp:TextBox>
             </div>
         </div>
-        <button class="defaultBtnAit yellow">
-            Register 
-        </button>
+        <asp:Button ID="registerBtn" runat="server" text="Register" CssClass="defaultBtnAit yellow"/>
     </div>
     </div>
     

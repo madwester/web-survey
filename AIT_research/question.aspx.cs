@@ -33,9 +33,9 @@ namespace AIT_research
                 string questionText = reader["text"].ToString();
                 string questionType = reader["name"].ToString().ToLower(); //checkbox, textbox, radio
 
+                //If its a textbox question
                 if (questionType.Equals("textbox"))
                 {
-                    //its a textbox question
                     TextType textTypeQuestion = (TextType)LoadControl("~/TextType.ascx");
                     textTypeQuestion.ID = "textboxQuestionControl";
                     textTypeQuestion.QuestionLabel.Text = questionText;
@@ -43,9 +43,9 @@ namespace AIT_research
                     //adding it to the placeholder in my webpage
                     questionPlaceholder.Controls.Add(textTypeQuestion);
                 }
+                //If its a checkbox question
                 else if (questionType.Equals("checkbox"))
                 {
-                    //its a checkbox question
                     CheckType checkTypeQuestion = (CheckType)LoadControl("~/CheckType.ascx");
                     checkTypeQuestion.ID = "checkboxQuestionControl";
                     checkTypeQuestion.QuestionLabel.Text = questionText;
@@ -65,11 +65,10 @@ namespace AIT_research
                         checkTypeQuestion.CheckList.Items.Add(item);
                     }
                     questionPlaceholder.Controls.Add(checkTypeQuestion);
-
                 }
+                //If its a radio button question
                 else if (questionType.Equals("radio"))
                 {
-                    //its a radio button question
                     RadioType radioTypeQuestion = (RadioType)LoadControl("~/RadioType.ascx");
                     radioTypeQuestion.ID = "radioboxQuestionControl";
                     radioTypeQuestion.QuestionLabel.Text = questionText;
@@ -106,23 +105,20 @@ namespace AIT_research
         }
         protected void nextBtn_Click(object sender, EventArgs e)
         {
-
-            //TODO check for follow up questions by checking selected answers against
-            //db to see if there are any follow up questions setup or load up a list
-            //of follow up questions we need to complete
+            //Creating a new list to store follow up questions
             List<Int32> followUpQuestions = new List<int>();
 
-            //if list of follow up questions exists then use it instead of the empty list 
+            //If list of follow up questions exists then use it instead of the empty list 
             if (HttpContext.Current.Session["followUpQuestions"] != null)
             {
                 followUpQuestions = (List<Int32>)HttpContext.Current.Session["followUpQuestions"];
             }
 
-            //getting connection from database helper class
+            //Getting connection from database helper class
             SqlConnection connection = DatabaseHelper.GetConnection();
 
-            //lets try find checkbox question contorl in web page
-            CheckType checkTypeQuestion = (CheckType)questionPlaceholder.FindControl("checkTypeQuestion");
+            //lets try find checkbox question contol in web page
+            CheckType checkTypeQuestion = (CheckType)questionPlaceholder.FindControl("checkboxQuestionControl");
             if (checkTypeQuestion != null)
             {
                 //then its a checkbox question
@@ -133,7 +129,8 @@ namespace AIT_research
                     {
                         int optionID = Int32.Parse(item.Value);
                         //TODO add answer to session or DB
-                        //TODO check if selected answers lead onto FOLLOW UP questions, if so, add to the list
+
+                        //Checking what the next question depending on answer is
                         SqlCommand nextQuestionCommand = new SqlCommand("SELECT * FROM [option] WHERE optionID = "
                             + optionID + " AND nextQuestion IS NOT NULL ", connection);
                         SqlDataReader nextQuestionReader = nextQuestionCommand.ExecuteReader();
@@ -181,23 +178,39 @@ namespace AIT_research
                 //followUpQuestions.Add(4);
             }
 
-            //find out what the next questions should be:
-            //get current question from DB, there is a column on this table with a foreign key to the next question
+            //Finding out what the next question is
             SqlCommand command = new SqlCommand("SELECT * FROM question where questionID = " + currentQuestion, connection);
             SqlDataReader reader = command.ExecuteReader();
 
-            //loop through reasults. should only be 1
+            //Looping through result
             while (reader.Read())
             {
                 //if at the end of the survey, next question foreign key column will be NULL, so I'm checking for NULLS first
                 //first, get index of nextQuestion column
                 int nextQuestionColumnIndex = reader.GetOrdinal("nextQuestionID");
                 //use this index to check if column is null
-                if (reader.IsDBNull(nextQuestionColumnIndex))
+
+                //IF THERE IS FOLLOW UP QUESTIONS THOUGH, do them first.
+                if (followUpQuestions.Count > 0)
                 {
-                    //if it comes here its the end of survey
-                    //to do redirect to registrations page or something finalising the survey
+                    //set current question to first follow up question, then remove from follow up question list
+                    // - so it doesnt repeat for next time
+                    HttpContext.Current.Session["questionID"] = followUpQuestions[0];
+                    followUpQuestions.RemoveAt(0);
+                    HttpContext.Current.Session["followUpQuestions"] = followUpQuestions;
+
+                    //redirect to same page to load up the next question as current question (aka, run pageLoad again)
+                    Response.Redirect("question.aspx");
                 }
+
+                //IF ITS THE END OF SURVEY
+                else if (reader.IsDBNull(nextQuestionColumnIndex))
+                {
+                    //redirect to register page
+                    Response.Redirect("Register.aspx");
+                }
+                
+                //If there are not follow questions
                 else
                 {
                     //not end of survey!
@@ -205,15 +218,7 @@ namespace AIT_research
 
                     //set this as the current question in the session
                     HttpContext.Current.Session["questionID"] = nextQuestion;
-
-                    //IF THERE IS FOLLOW UP QUESTIONS THOUGH, do them first.
-                    if (followUpQuestions.Count > 0)
-                    {
-                        //set current question to first follow up question, then remove from follow up question list
-                        // - so it doesnt repeat for next time
-                        HttpContext.Current.Session["questionID"] = followUpQuestions[0];
-                        followUpQuestions.RemoveAt(0);
-                    }
+                    
                     //store the follow up questions list in session (just in case it changed)
                     HttpContext.Current.Session["followUpQuestions"] = followUpQuestions;
 
