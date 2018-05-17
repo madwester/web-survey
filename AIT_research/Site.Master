@@ -42,7 +42,7 @@
 
         <div class="navbar navbar-inverse navbar-fixed-top">
             <div class="container-fluid navigationDiv">
-                <img src="images/logo.png" />
+                <a href="Default.aspx"><img src="images/logo.png" /></a>
                 <h2 id="navTitle" class="navTitle">Page title</h2>
             </div>
         </div>

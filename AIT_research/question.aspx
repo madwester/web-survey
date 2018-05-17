@@ -4,8 +4,10 @@
     <div class="container">
         <div class="row questionRow">
             <asp:PlaceHolder ID="questionPlaceholder" runat="server"></asp:PlaceHolder>
-            <button id="nextBtn" onclick="nextBtn_Click" class="btn defaultBtnAit blue">Continue</button>
-            <button class="btn defaultBtnAit yellow">Skip question</button>
+            <div class="buttons">
+             <asp:Button ID="nextBtn" runat="server" OnClick="nextBtn_Click" CssClass="defaultBtnAit questionBtn blue" text="Continue"/>
+             <asp:Button ID="skipBtn" runat="server" OnClick="nextBtn_Click" CssClass="defaultBtnAit questionBtn yellow" text="Skip Question"/>
+            </div>
         </div>
     </div>
             <asp:BulletedList ID="selectedAnswerBulletedList" runat="server">
