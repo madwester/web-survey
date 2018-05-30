@@ -3,7 +3,7 @@
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
 
-    <div class="container loginDiv">
+    <div class="container loginDiv contentInside">
         <h2>Welcome back staff member, please sign in!</h2>
         <img src="images/logo.png" />
         <div class="loginInputs">

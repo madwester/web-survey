@@ -1,7 +1,7 @@
 ﻿<%@ Page Title="Home Page" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="AIT_research._Default" %>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
-    <div class="container containerHomePage">
+    <div class="container containerHomePage contentInside">
         <div class="row">
             <div class="col-md-12 text-center column">
                 <h1>Welcome to AIT research</h1>

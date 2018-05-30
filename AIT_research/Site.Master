@@ -50,10 +50,10 @@
             <asp:ContentPlaceHolder ID="MainContent" runat="server">
             </asp:ContentPlaceHolder>
             <hr />
-            <footer>
-                <p>&copy; <%: DateTime.Now.Year %> - All rights reserved. AIT Research.</p>
-            </footer>
         </div>
+        <footer class="footer">
+            <p>&copy; <%: DateTime.Now.Year %> - All rights reserved. AIT Research.</p>
+        </footer>
     </form>
 </body>
 </html>
