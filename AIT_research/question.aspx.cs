@@ -261,7 +261,7 @@ namespace AIT_research
             connection.Close();
         }
 
-        private static List<Answer> getListOfAnswerFromSession()
+        public static List<Answer> getListOfAnswerFromSession()
         {
             //creating an empty list first
             List<Answer> answers = new List<Answer>();
