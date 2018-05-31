@@ -9,7 +9,6 @@ html, body {
 }
 .body-content {
     min-height: 100%;
-    padding: 80px 0;
 }
 a {
     color: black;
@@ -40,6 +39,11 @@ h1 {
     text-transform: uppercase;
     margin: 0 0 30px 0;
 }
+h2 {
+    font-family: 'Oswald', sans-serif;
+    text-transform: uppercase;
+    margin: 0 0 30px 0;
+}
 .longButton {
     width: 100%;
     padding: 10px 20px;
@@ -66,8 +70,8 @@ h1 {
     border: 0;
 }
 .navbar img {
-    width: 20%;
-    height: 20%;
+    width: 30%;
+    height: 30%;
 }
 .navigationDiv {
     display: flex;
@@ -109,7 +113,7 @@ h1 {
 
 .questionRow {
     background-color: #EFEFEF;
-    padding: 50px;
+    padding: 110px 50px 50px 50px;
 }
 
 table {
@@ -141,7 +145,7 @@ label {
 ---------------------------*/
 
 .searchDiv {
-    margin: 40px 0;
+    margin: 100px 0;
 }
 .foldOutContainer {
     margin-top: -7px;
@@ -149,7 +153,9 @@ label {
     background-color: #EFEFEF;
     border-radius: 0 0 5px 5px;
 }
-
+#searchBtn {
+    margin: 20px 0;
+}
 /*---------------------------
     LOGIN PAGE
 ---------------------------*/
@@ -200,7 +206,7 @@ label {
     margin-bottom: 15px;
 }
 .registerDiv {
-    margin: 20px 0;
+    margin: 100px 0;
     min-height: 700px;
 }
 .registerLabel {
@@ -221,4 +227,13 @@ footer {
     padding: 30px;
 }
 
-    
+
+
+.content {
+    text-align: center;
+    background-color: #EFEFEF;
+    padding: 110px 40px 100px 40px;
+}
+.contentThankYou {
+    padding: 30px 0 200px 0;
+}

@@ -92,8 +92,15 @@ namespace AIT_research
         }
 
         private static int GetCurrentQuestionNumber() {
-            //ask db for lowest number instead of default
-            int currentQuestion = 1; //to do dont use default values, ask DB for first question
+
+            //asking db for the lowest number to set current question
+            SqlConnection connection = DatabaseHelper.GetConnection();
+            SqlCommand getFirstQuestion = new SqlCommand("SELECT min(questionID) FROM question", connection);
+            SqlDataReader reader = getFirstQuestion.ExecuteReader();
+            reader.Read();
+            int currentQuestion = Int32.Parse(reader.GetValue(0).ToString());
+            connection.Close();
+
             if (HttpContext.Current.Session["questionID"] != null)
             {
                 currentQuestion = (int)HttpContext.Current.Session["questionID"];
@@ -107,7 +114,6 @@ namespace AIT_research
 
         protected void nextBtn_Click(object sender, EventArgs e)
         {
-
             //Creating a new list to store follow up questions
             List<Int32> followUpQuestions = new List<int>();
 
@@ -128,7 +134,6 @@ namespace AIT_research
             if (checkTypeQuestion != null)
             {
                 //then its a checkbox question
-         
                 foreach (ListItem item in checkTypeQuestion.CheckList.Items)
                 {
                     if (item.Selected)
@@ -140,8 +145,7 @@ namespace AIT_research
                         a.questionID = GetCurrentQuestionNumber();
                         a.optionID = optionID;
 
-                        //TO DO!!: add answer to the session list 
-                        //something like:
+                        //adding answers to session list
                         answers.Add(a);
 
                         //Checking what the next question depending on answer is
@@ -151,7 +155,10 @@ namespace AIT_research
                         while (nextQuestionReader.Read())
                         {
                             int nextQuestionItem = (int)nextQuestionReader["nextQuestion"];
-                            followUpQuestions.Add(nextQuestionItem);
+                        
+                            //if follow up questions doesnt already exist, add it
+                            if (!followUpQuestions.Contains(nextQuestionItem))
+                                followUpQuestions.Add(nextQuestionItem);
                         }
                     }
                 }
@@ -168,17 +175,14 @@ namespace AIT_research
                     int optionID = Int32.Parse(item.Value);
 
                     if (item.Selected)
-                    {
-                        //TODO add answer to session or DB
-                        //TODO check if selected answers lead onto FOLLOW UP questions, if so, add to the list
+                    {      
                         //creating a new answer based on answer class
                         Answer a = new Answer();
                         a.questionID = GetCurrentQuestionNumber();
                         a.optionID = optionID;
-                        //adding to list
+                        //adding answers to session list
                         answers.Add(a);
                     }
-           
                 }
             //empty list 
             }
@@ -186,7 +190,9 @@ namespace AIT_research
             TextType textTypeQuestion = (TextType)questionPlaceholder.FindControl("textboxQuestionControl");
             if (textTypeQuestion != null)
             {
-                //to do add this answer to db or session
+                //then its a text type question
+
+                //adding answer to db
                 Answer a = new Answer();
                 a.questionID = GetCurrentQuestionNumber();
                 //getting value from textbox
@@ -196,14 +202,6 @@ namespace AIT_research
 
             //creating a variable to check what current question is
             int currentQuestion = GetCurrentQuestionNumber();
-            
-            //FOR TESTING ONLY, faking adding follow up qustions. aka dont do this in final assignment
-            if (currentQuestion == 1) //hardcoded checks loses marks in assignment
-            {
-                //add your follow up question ids to the list
-                //followUpQuestions.Add(3);
-                //followUpQuestions.Add(4);
-            }
 
             //Finding out what the next question is
             SqlCommand command = new SqlCommand("SELECT * FROM question where questionID = " + currentQuestion, connection);
