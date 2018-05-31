@@ -1,11 +1,13 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true"  CodeBehind="Register.aspx.cs" MasterPageFile="~/Site.Master" Inherits="AIT_research.Register" %>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
-    <div class="container-fluid registerDiv">
 
-        <button class="longButton blue">continue as anonymous 
-            <span class="glyphicon glyphicon-chevron-right"></span>
-        </button>
+    <div class="container-fluid registerDiv">
+        <asp:LinkButton ID="continueAnonymousBtn" 
+                        runat="server" 
+                        CssClass="longButton blue" OnClick="continueAnonymousBtn_Click">
+            continue as anonymous <i class="fa fa-chevron-right"></i>
+        </asp:LinkButton>
         <input type="button" id="registerMember" class="longButton yellow" value="register as a member"/>
     <div id="registerMemberDiv" class="foldOutContainer container" style="display:none">
         <div class="row registerRow">
@@ -30,7 +32,7 @@
                 <asp:TextBox class="registerTextBox" runat="server"></asp:TextBox>
             </div>
         </div>
-        <asp:Button ID="registerBtn" runat="server" text="Register" CssClass="defaultBtnAit yellow"/>
+        <asp:Button ID="registerBtn" runat="server" text="Register" CssClass="defaultBtnAit yellow full"/>
     </div>
     </div>
     

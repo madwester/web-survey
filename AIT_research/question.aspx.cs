@@ -107,6 +107,7 @@ namespace AIT_research
 
         protected void nextBtn_Click(object sender, EventArgs e)
         {
+
             //Creating a new list to store follow up questions
             List<Int32> followUpQuestions = new List<int>();
 
@@ -119,7 +120,8 @@ namespace AIT_research
             //Getting connection from database helper class
             SqlConnection connection = DatabaseHelper.GetConnection();
 
-            //to do: !! get the answer list from session
+            //Getting the answer list from session
+            List<Answer> answers = getListOfAnswerFromSession();
 
             //lets try find checkbox question contol in web page
             CheckType checkTypeQuestion = (CheckType)questionPlaceholder.FindControl("checkboxQuestionControl");
@@ -132,9 +134,15 @@ namespace AIT_research
                     if (item.Selected)
                     {
                         int optionID = Int32.Parse(item.Value);
-                        //TODO add answer to session or DB
 
-                        //add answer to the session list 
+                        //creating a new answer based on answer class
+                        Answer a = new Answer();
+                        a.questionID = GetCurrentQuestionNumber();
+                        a.optionID = optionID;
+
+                        //TO DO!!: add answer to the session list 
+                        //something like:
+                        answers.Add(a);
 
                         //Checking what the next question depending on answer is
                         SqlCommand nextQuestionCommand = new SqlCommand("SELECT * FROM [option] WHERE optionID = "
@@ -157,12 +165,20 @@ namespace AIT_research
 
                 foreach (ListItem item in radioTypeQuestion.RadioList.Items)
                 {
+                    int optionID = Int32.Parse(item.Value);
+
                     if (item.Selected)
                     {
                         //TODO add answer to session or DB
                         //TODO check if selected answers lead onto FOLLOW UP questions, if so, add to the list
-
+                        //creating a new answer based on answer class
+                        Answer a = new Answer();
+                        a.questionID = GetCurrentQuestionNumber();
+                        a.optionID = optionID;
+                        //adding to list
+                        answers.Add(a);
                     }
+           
                 }
             //empty list 
             }
@@ -171,6 +187,11 @@ namespace AIT_research
             if (textTypeQuestion != null)
             {
                 //to do add this answer to db or session
+                Answer a = new Answer();
+                a.questionID = GetCurrentQuestionNumber();
+                //getting value from textbox
+                a.answerText = textTypeQuestion.TextboxInputQuestion.Text;
+                answers.Add(a);
             }
 
             //creating a variable to check what current question is
@@ -189,6 +210,7 @@ namespace AIT_research
             SqlDataReader reader = command.ExecuteReader();
 
             //save to session list 
+            HttpContext.Current.Session["answers"] = answers;
 
             //Looping through result
             while (reader.Read())
