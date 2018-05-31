@@ -90,6 +90,7 @@ namespace AIT_research
             }
             connection.Close();
         }
+
         private static int GetCurrentQuestionNumber() {
             //ask db for lowest number instead of default
             int currentQuestion = 1; //to do dont use default values, ask DB for first question
@@ -103,6 +104,7 @@ namespace AIT_research
             }
             return currentQuestion;
         }
+
         protected void nextBtn_Click(object sender, EventArgs e)
         {
             //Creating a new list to store follow up questions
@@ -117,6 +119,8 @@ namespace AIT_research
             //Getting connection from database helper class
             SqlConnection connection = DatabaseHelper.GetConnection();
 
+            //to do: !! get the answer list from session
+
             //lets try find checkbox question contol in web page
             CheckType checkTypeQuestion = (CheckType)questionPlaceholder.FindControl("checkboxQuestionControl");
             if (checkTypeQuestion != null)
@@ -129,6 +133,8 @@ namespace AIT_research
                     {
                         int optionID = Int32.Parse(item.Value);
                         //TODO add answer to session or DB
+
+                        //add answer to the session list 
 
                         //Checking what the next question depending on answer is
                         SqlCommand nextQuestionCommand = new SqlCommand("SELECT * FROM [option] WHERE optionID = "
@@ -182,6 +188,8 @@ namespace AIT_research
             SqlCommand command = new SqlCommand("SELECT * FROM question where questionID = " + currentQuestion, connection);
             SqlDataReader reader = command.ExecuteReader();
 
+            //save to session list 
+
             //Looping through result
             while (reader.Read())
             {
@@ -208,6 +216,8 @@ namespace AIT_research
                 {
                     //redirect to register page
                     Response.Redirect("Register.aspx");
+
+                    //in registration page or end of survey save sesion list to db
                 }
                 
                 //If there are not follow questions
@@ -227,6 +237,19 @@ namespace AIT_research
                 }
             }
             connection.Close();
+        }
+
+        private static List<Answer> getListOfAnswerFromSession()
+        {
+            //creating an empty list first
+            List<Answer> answers = new List<Answer>();
+
+            //if stored in session, get it
+            if (HttpContext.Current.Session["answers"] != null)
+            {
+                answers = (List<Answer>)HttpContext.Current.Session["answers"];
+            }
+            return answers;
         }
     }
 }
