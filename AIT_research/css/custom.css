@@ -146,6 +146,7 @@ label {
 
 .searchDiv {
     margin: 100px 0;
+    min-height: 600px;
 }
 .foldOutContainer {
     margin-top: -7px;
@@ -155,6 +156,25 @@ label {
 }
 #searchBtn {
     margin: 20px 0;
+}
+tbody {
+    display: flex;
+}
+td {
+    padding: 0 18px 0 0;
+}
+.columnSearch {
+    display: flex;
+    flex-direction: column;
+}
+.rowSearch {
+    margin-bottom: 20px;
+}
+.searchInput {
+    border: 0;
+    border-radius: 5px;
+    padding: 5px;
+    margin-top: 8px;
 }
 /*---------------------------
     LOGIN PAGE
@@ -221,13 +241,10 @@ label {
 }
 footer {
     background-color: #EFEFEF;
-    position: absolute;
     bottom: 0;
     width: 100%;
     padding: 30px;
 }
-
-
 
 .content {
     text-align: center;
@@ -237,3 +254,4 @@ footer {
 .contentThankYou {
     padding: 30px 0 200px 0;
 }
+

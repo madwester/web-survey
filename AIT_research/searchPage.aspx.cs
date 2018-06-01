@@ -20,7 +20,12 @@ namespace AIT_research
             const int stateQuestionId = 3;
             const int bankQuestionId = 7;
             const int newspaperQuestionId = 8;
+            const int sportQuestionId = 9;
+            const int travelQuestionId = 10;
+            const int bankserviceQuestionId = 11;
+            const int interestsQuestionId = 12;
 
+            //GENDER
             List<ListItem> genderItem = new List<ListItem>();
             genderItem = optionList(genderQuestionId);
             foreach (ListItem item in genderItem)
@@ -28,6 +33,69 @@ namespace AIT_research
                 genderList.Items.Add(item);
             }
 
+            //AGE RANGE
+            List<ListItem> ageItem = new List<ListItem>();
+            ageItem = optionList(ageQuestionId);
+            foreach (ListItem item in ageItem)
+            {
+                ageList.Items.Add(item);
+            }
+
+            //STATE
+            List<ListItem> stateItem = new List<ListItem>();
+            stateItem = optionList(stateQuestionId);
+            foreach (ListItem item in stateItem)
+            {
+                stateList.Items.Add(item);
+            }
+
+            //BANK 
+            List<ListItem> bankItem = new List<ListItem>();
+            bankItem = optionList(bankQuestionId);
+            foreach (ListItem item in bankItem)
+            {
+                banksList.Items.Add(item);
+            }
+
+            //NEWPAPER
+            List<ListItem> newspaperItem = new List<ListItem>();
+            newspaperItem = optionList(newspaperQuestionId);
+            foreach (ListItem item in newspaperItem)
+            {
+                newspaperList.Items.Add(item);
+            }
+
+            //SPORT
+            List<ListItem> sportsItem = new List<ListItem>();
+            sportsItem = optionList(sportQuestionId);
+            foreach (ListItem item in sportsItem)
+            {
+                sportList.Items.Add(item);
+            }
+
+            //TRAVEL
+            List<ListItem> travelItem = new List<ListItem>();
+            travelItem = optionList(travelQuestionId);
+            foreach (ListItem item in travelItem)
+            {
+                travelList.Items.Add(item);
+            }
+
+            //BANK SERVICE
+            List<ListItem> bankserviceItem = new List<ListItem>();
+            bankserviceItem = optionList(bankserviceQuestionId);
+            foreach (ListItem item in bankserviceItem)
+            {
+                bankserviceList.Items.Add(item);
+            }
+
+            //ADDITIONAL INTERESTS
+            List<ListItem> interestItem = new List<ListItem>();
+            interestItem = optionList(interestsQuestionId);
+            foreach (ListItem item in interestItem)
+            {
+                interestList.Items.Add(item);
+            }
         }
         public List<ListItem> optionList(int questionID)
         {
