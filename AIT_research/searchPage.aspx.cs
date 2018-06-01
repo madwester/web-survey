@@ -15,6 +15,7 @@ namespace AIT_research
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            //creating a constant variable to read the id of question from database
             const int genderQuestionId = 1;
             const int ageQuestionId = 2;
             const int stateQuestionId = 3;
@@ -24,6 +25,8 @@ namespace AIT_research
             const int travelQuestionId = 10;
             const int bankserviceQuestionId = 11;
             const int interestsQuestionId = 12;
+
+            //creating a list of every option item from each question in database
 
             //GENDER
             List<ListItem> genderItem = new List<ListItem>();
@@ -101,18 +104,27 @@ namespace AIT_research
         {
             try
             {
+                //creating a list to put all option items in
                 List<ListItem> items = new List<ListItem>();
                 //getting connection from database helper class
                 SqlConnection connection = DatabaseHelper.GetConnection();
 
+                //selecting all options from database
                 SqlCommand optionItemsCommand = new SqlCommand("SELECT * FROM [option] WHERE questionID = " + questionID, connection);
+                
+                //reading all options
                 SqlDataReader optionItemsReader = optionItemsCommand.ExecuteReader();
+                //cycle though option items
                 while (optionItemsReader.Read())
                 {
+                    //creating a new list of optionitems with the values from questions in database
                     ListItem optionItem = new ListItem(optionItemsReader["value"].ToString(), optionItemsReader["optionID"].ToString());
+                    //adding each option item to list
                     items.Add(optionItem);
                 }
+                //closing connection
                 connection.Close();
+                //returning all items
                 return items;
             }
             catch (Exception ex)

@@ -6,7 +6,7 @@
             <asp:PlaceHolder ID="questionPlaceholder" runat="server"></asp:PlaceHolder>
             <div class="buttons">
                 <asp:Button ID="nextBtn" runat="server" OnClick="nextBtn_Click" CssClass="defaultBtnAit questionBtn blue" text="Continue"/>
-                <asp:Button ID="skipBtn" runat="server" OnClick="nextBtn_Click" CssClass="defaultBtnAit questionBtn yellow" text="Skip Question"/>
+                <asp:Button ID="skipBtn" runat="server" CssClass="defaultBtnAit questionBtn yellow" text="Skip Question" OnClick="nextBtn_Click"/>
             </div>
         </div>
     </div>

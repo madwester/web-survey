@@ -5,7 +5,7 @@ using System.Web;
 
 namespace AIT_research
 {
-    //structure of an answer before saves in session/db
+    //this is the structure of an answer before saves in session/db
     public class Answer
     {
         public int questionID;

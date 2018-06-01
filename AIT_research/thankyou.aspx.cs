@@ -16,6 +16,7 @@ namespace AIT_research
 
         protected void returnBtn_Click(object sender, EventArgs e)
         {
+            //redirect user to homepage when this button is clicked
             Response.Redirect("Default.aspx");
         }
     }

@@ -47,13 +47,17 @@ namespace AIT_research
                     //If its a checkbox question
                     else if (questionType.Equals("checkbox"))
                     {
+                        //creating an instance of checktype function
                         CheckType checkTypeQuestion = (CheckType)LoadControl("~/CheckType.ascx");
+                        //setting the id
                         checkTypeQuestion.ID = "checkboxQuestionControl";
+                        //setting the text of label
                         checkTypeQuestion.QuestionLabel.Text = questionText;
 
                         //need a new command to get all options belonging to question
                         SqlCommand optionCommand = new SqlCommand(
                             "SELECT * FROM [option] WHERE questionID = " + currentQuestion, connection);
+                        //reading the command I just created
                         SqlDataReader optionReader = optionCommand.ExecuteReader();
 
                         //cycle through rows of options
@@ -65,36 +69,45 @@ namespace AIT_research
                             //add item to my checkbox list
                             checkTypeQuestion.CheckList.Items.Add(item);
                         }
+                        //adding checktype question to placeholder
                         questionPlaceholder.Controls.Add(checkTypeQuestion);
                     }
 
                     //If its a radio button question
                     else if (questionType.Equals("radio"))
-                    {
+                    {   
+                        //creating an instance of radiotype function
                         RadioType radioTypeQuestion = (RadioType)LoadControl("~/RadioType.ascx");
+                        //setting the id
                         radioTypeQuestion.ID = "radioboxQuestionControl";
+                        //setting the text of label
                         radioTypeQuestion.QuestionLabel.Text = questionText;
 
                         //need a new command to get all options belonging to question
                         SqlCommand optionCommand = new SqlCommand(
                             "SELECT * FROM [option] WHERE questionID = " + currentQuestion, connection);
+                        //reading the command I just created
                         SqlDataReader optionReader = optionCommand.ExecuteReader();
 
+                        //cycle through rows of options
                         while (optionReader.Read())
                         {
+                            //for every row, I am building a list item representing it
                             ListItem item = new ListItem(optionReader["value"].ToString(), optionReader["optionID"].ToString());
 
                             //add item to my radio list
                             radioTypeQuestion.RadioList.Items.Add(item);
                         }
+                        //adding radio type question to placeholder
                         questionPlaceholder.Controls.Add(radioTypeQuestion);
                     }
                 }
+                //closing connection to db
                 connection.Close();
             }
             catch (Exception ex)
             {
-                Console.WriteLine("");
+                Console.WriteLine("Could not read question");
             }
             
         }
@@ -102,21 +115,29 @@ namespace AIT_research
         private static int GetCurrentQuestionNumber() {
             try
             {
-            //asking db for the lowest number to set current question
-            SqlConnection connection = DatabaseHelper.GetConnection();
-            SqlCommand getFirstQuestion = new SqlCommand("SELECT min(questionID) FROM question", connection);
-            SqlDataReader reader = getFirstQuestion.ExecuteReader();
-            reader.Read();
-            int currentQuestion = Int32.Parse(reader.GetValue(0).ToString());
-            connection.Close();
-            if (HttpContext.Current.Session["questionID"] != null)
-            {
-                currentQuestion = (int)HttpContext.Current.Session["questionID"];
-            }
-            else
-            {
-                HttpContext.Current.Session["questionID"] = currentQuestion;
-            }
+                //asking db for the lowest number to set current question
+                SqlConnection connection = DatabaseHelper.GetConnection();
+
+                //command to get the first question from database
+                SqlCommand getFirstQuestion = new SqlCommand("SELECT min(questionID) FROM question", connection);
+            
+                //read from the command I just created
+                SqlDataReader reader = getFirstQuestion.ExecuteReader();
+                reader.Read();
+                //passing the current question id to a string
+                int currentQuestion = Int32.Parse(reader.GetValue(0).ToString());
+
+                //closing the connection to db
+                connection.Close();
+                //figuring out if current question exist in session or not
+                if (HttpContext.Current.Session["questionID"] != null)
+                {
+                    currentQuestion = (int)HttpContext.Current.Session["questionID"];
+                }
+                else
+                {
+                    HttpContext.Current.Session["questionID"] = currentQuestion;
+                }
                 return currentQuestion;
             }
             catch (Exception ex)
@@ -165,10 +186,12 @@ namespace AIT_research
                             //adding answers to session list
                             answers.Add(a);
 
-                            //Checking what the next question depending on answer is
+                            //Creating a command to check what the next question depending on answer is
                             SqlCommand nextQuestionCommand = new SqlCommand("SELECT * FROM [option] WHERE optionID = "
                                 + optionID + " AND nextQuestion IS NOT NULL ", connection);
+                            //reding the command I just created
                             SqlDataReader nextQuestionReader = nextQuestionCommand.ExecuteReader();
+                            //cycle though next questions
                             while (nextQuestionReader.Read())
                             {
                                 int nextQuestionItem = (int)nextQuestionReader["nextQuestion"];
@@ -187,8 +210,10 @@ namespace AIT_research
                 {
                     //then its a radio question
 
+                    //cycle though radiotype questions
                     foreach (ListItem item in radioTypeQuestion.RadioList.Items)
                     {
+                        //creating an option id of the value of item
                         int optionID = Int32.Parse(item.Value);
 
                         if (item.Selected)
@@ -272,6 +297,7 @@ namespace AIT_research
                         Response.Redirect("question.aspx");
                     }
                 }
+                //closing the connection to db
                 connection.Close();
             }
             catch (Exception ex)

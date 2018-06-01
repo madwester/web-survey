@@ -9,12 +9,14 @@ namespace AIT_research
 {
     public partial class TextType : System.Web.UI.UserControl
     {
-        //making public properties to access private attributes
+        //function to make public properties to access private attributes
+
+        //preparing to get question label from db
         public Label QuestionLabel {
             get {return questionLabel; }
             set { questionLabel = value; }
         }
-
+        //preparing textbox to get input from user
         public TextBox TextboxInputQuestion {
             get { return questionTextBox; }
             set { questionTextBox = value; }

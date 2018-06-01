@@ -80,7 +80,9 @@ namespace AIT_research
         //button when user choose to be anonymous
         protected void continueAnonymousBtn_Click(object sender, EventArgs e)
         {
+            //getting the ip address of the user
             string respondentIpAddress = GetIPAddress();
+            //creating a connection
             SqlConnection connection = DatabaseHelper.GetConnection();
 
             //creating a string of the current time
@@ -88,6 +90,7 @@ namespace AIT_research
             
             if (HttpContext.Current.Session["respondentSessionID"] == null)
             {
+                //inserting registration data to db
                 SqlCommand command = new SqlCommand("INSERT INTO respondents (firstName, lastName, date, ipAddress)" +
                                                     " VALUES ('anonymous', 'anonymous', '" + currentTime + "', '" + respondentIpAddress + "');SELECT CAST(scope_identity() AS int)", connection);
                 int newRespondentSessionID = (int)command.ExecuteScalar();
@@ -97,18 +100,21 @@ namespace AIT_research
                 List<Answer> answers = question.getListOfAnswerFromSession();
                 foreach (Answer a in answers)
                 {
+                    //inserting answers to database
                     //answerID solves itself
                     SqlCommand insertAnswerCommand = new SqlCommand("INSERT INTO answer (questionID, respondentID, text, optionID)" +
                                                                     " VALUES ('" + a.questionID + "', '" + newRespondentSessionID + "', '" + a.answerText + "', '" + a.optionID + "' );", connection);
                     int rowsaffected = insertAnswerCommand.ExecuteNonQuery();
                     if (rowsaffected <= 0)
                     {
-                        //something bad happened
+                        //no answers were being inserted
                     }
                 }
                 //empty list of answers in the session as they are stored in DB by this stage
                 HttpContext.Current.Session["answers"] = null;
+                //end of survey so redirecting user to thank you page
                 Response.Redirect("Thankyou.aspx");
+                //closing connection
                 connection.Close();
             }
         }

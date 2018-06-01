@@ -259,14 +259,6 @@ td {
     text-align: center;
 }
 
-.fullContainer::before {
-    background-color: #75D6D4;
-    width: 10%;
-    content: " ";
-    position: fixed;
-    height: 100%;
-    top: 0;
-}
 .leftItem {
     padding: 200px 100px;
     height: 100%;
@@ -279,6 +271,14 @@ td {
 }
 .contentLeftItem {
     transform: skewX(15deg);
+}
+@media only screen and (max-width: 818px) {
+    .leftItem {
+        transform: skewX(0deg);
+    }
+    .contentLeftItem {
+        transform: skewX(0deg);
+    }
 }
 .rightItem {
     position: fixed;
