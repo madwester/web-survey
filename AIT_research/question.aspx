@@ -10,4 +10,8 @@
             </div>
         </div>
     </div>
+        <script type="text/javascript">
+    //set page title
+    document.getElementById("navTitle").innerHTML = "";
+</script>
 </asp:Content>
