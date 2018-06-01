@@ -33,7 +33,7 @@
             </div>
         </div>
         <div class="row rowSearch">
-            <div class="col-md-12 col-xs-12">
+            <div class="col-md-12 col-xs-12 columnSearch">
                 <asp:Label runat="server" Text="Age range"></asp:Label>
                 <asp:CheckBoxList ID="ageList" runat="server"></asp:CheckBoxList>
             </div>
@@ -51,43 +51,43 @@
             </div>
         </div>
         <div class="row rowSearch">
-            <div class="col-md-12 col-xs-12">
+            <div class="col-md-12 col-xs-12 columnSearch">
                 <asp:Label runat="server" Text="State/Territory"></asp:Label>
                 <asp:CheckBoxList ID="stateList" runat="server"></asp:CheckBoxList>
             </div>
         </div>
         <div class="row rowSearch">
-            <div class="col-md-12 col-xs-12">
+            <div class="col-md-12 col-xs-12 columnSearch">
                 <asp:Label runat="server" Text="Banks Used"></asp:Label>
                 <asp:CheckBoxList ID="banksList" runat="server"></asp:CheckBoxList>
             </div>
         </div>
         <div class="row rowSearch">
-            <div class="col-md-12 col-xs-12">
+            <div class="col-md-12 col-xs-12 columnSearch">
                 <asp:Label runat="server" Text="Bank Services"></asp:Label>
                 <asp:CheckBoxList ID="bankserviceList" runat="server"></asp:CheckBoxList>
             </div>
         </div>
         <div class="row rowSearch">
-            <div class="col-md-12 col-xs-12">
+            <div class="col-md-12 col-xs-12 columnSearch">
                 <asp:Label runat="server" Text="Newspaper Read"></asp:Label>
                 <asp:CheckBoxList ID="newspaperList" runat="server"></asp:CheckBoxList>
             </div>
         </div>
         <div class="row rowSearch">
-            <div class="col-md-12 col-xs-12">
+            <div class="col-md-12 col-xs-12 columnSearch">
                 <asp:Label runat="server" Text="Aditional interests"></asp:Label>
                 <asp:CheckBoxList ID="interestList" runat="server"></asp:CheckBoxList>
             </div>
         </div>
         <div class="row rowSearch">
-            <div class="col-md-12 col-xs-12">
+            <div class="col-md-12 col-xs-12 columnSearch">
                 <asp:Label runat="server" Text="Interests in Sport"></asp:Label>
                 <asp:CheckBoxList ID="sportList" runat="server"></asp:CheckBoxList>
             </div>
         </div>
         <div class="row rowSearch">
-            <div class="col-md-12 col-xs-12">
+            <div class="col-md-12 col-xs-12 columnSearch">
                 <asp:Label runat="server" Text="Interest in Travel"></asp:Label>
                 <asp:CheckBoxList ID="travelList" runat="server"></asp:CheckBoxList>
             </div>

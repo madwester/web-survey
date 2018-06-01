@@ -7,4 +7,8 @@
             <asp:Button ID="returnBtn" runat="server" CssClass="defaultBtnAit yellow" text="Return to Homepage" OnClick="returnBtn_Click"/>
         </div>
     </div>
+    <script type="text/javascript">
+    //set page title
+    document.getElementById("navTitle").innerHTML = "End of survey";
+</script>
 </asp:Content>

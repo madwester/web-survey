@@ -2,13 +2,27 @@
     GENERAL
 ---------------------------*/
 html, body {
-    height: 100%;
     margin: 0;
     padding: 0;
     font-family: 'Roboto', sans-serif;
 }
-.body-content {
-    min-height: 100%;
+form {
+    min-height: calc(100vh - 50px);
+}
+footer {
+    background-color: #EFEFEF;
+    width: 100%;
+    margin-top: 100px;
+    padding: 40px;
+    height: 100px;
+    position: fixed;
+    bottom: 0;
+}
+.content {
+    background-color: #EFEFEF;
+}
+.contentInside {
+    padding-bottom: 50px;
 }
 a {
     color: black;
@@ -146,10 +160,9 @@ label {
 
 .searchDiv {
     margin: 100px 0;
-    min-height: 600px;
 }
 .foldOutContainer {
-    margin-top: -7px;
+    margin: -7px 0 100px 0;
     padding: 40px;
     background-color: #EFEFEF;
     border-radius: 0 0 5px 5px;
@@ -157,7 +170,7 @@ label {
 #searchBtn {
     margin: 20px 0;
 }
-tbody {
+.columnSearch tbody {
     display: flex;
 }
 td {
@@ -239,19 +252,37 @@ td {
     width: 100%;
     margin-top: 5px;
 }
-footer {
-    background-color: #EFEFEF;
-    bottom: 0;
-    width: 100%;
-    padding: 30px;
-}
 
-.content {
-    text-align: center;
-    background-color: #EFEFEF;
-    padding: 110px 40px 100px 40px;
-}
+
 .contentThankYou {
-    padding: 30px 0 200px 0;
+    padding: 150px 0 200px 0;
+    text-align: center;
 }
 
+.fullContainer::before {
+    background-color: #75D6D4;
+    width: 10%;
+    content: " ";
+    position: fixed;
+    height: 100%;
+    top: 0;
+}
+.leftItem {
+    padding: 200px 100px;
+    height: 100%;
+    background-color: #75D6D4;
+    width: 80%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    transform: skewX(-15deg);
+}
+.contentLeftItem {
+    transform: skewX(15deg);
+}
+.rightItem {
+    position: fixed;
+    top: 250px;
+    right: 100px;
+    width: 300px;
+}

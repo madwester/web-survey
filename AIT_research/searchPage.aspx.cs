@@ -99,19 +99,27 @@ namespace AIT_research
         }
         public List<ListItem> optionList(int questionID)
         {
-            List<ListItem> items = new List<ListItem>();
-            //getting connection from database helper class
-            SqlConnection connection = DatabaseHelper.GetConnection();
-
-            SqlCommand optionItemsCommand = new SqlCommand("SELECT * FROM [option] WHERE questionID = " + questionID, connection);
-            SqlDataReader optionItemsReader = optionItemsCommand.ExecuteReader();
-            while (optionItemsReader.Read())
+            try
             {
-                ListItem optionItem = new ListItem(optionItemsReader["value"].ToString(), optionItemsReader["optionID"].ToString());
-                items.Add(optionItem);
+                List<ListItem> items = new List<ListItem>();
+                //getting connection from database helper class
+                SqlConnection connection = DatabaseHelper.GetConnection();
+
+                SqlCommand optionItemsCommand = new SqlCommand("SELECT * FROM [option] WHERE questionID = " + questionID, connection);
+                SqlDataReader optionItemsReader = optionItemsCommand.ExecuteReader();
+                while (optionItemsReader.Read())
+                {
+                    ListItem optionItem = new ListItem(optionItemsReader["value"].ToString(), optionItemsReader["optionID"].ToString());
+                    items.Add(optionItem);
+                }
+                connection.Close();
+                return items;
             }
-            connection.Close();
-            return items;
+            catch (Exception ex)
+            {
+                Console.WriteLine("Couldn't get options from database");
+                return null;
+            }
         }
     }
 }

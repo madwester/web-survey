@@ -5,8 +5,8 @@
         <div class="row questionRow">
             <asp:PlaceHolder ID="questionPlaceholder" runat="server"></asp:PlaceHolder>
             <div class="buttons">
-             <asp:Button ID="nextBtn" runat="server" OnClick="nextBtn_Click" CssClass="defaultBtnAit questionBtn blue" text="Continue"/>
-             <asp:Button ID="skipBtn" runat="server" OnClick="nextBtn_Click" CssClass="defaultBtnAit questionBtn yellow" text="Skip Question"/>
+                <asp:Button ID="nextBtn" runat="server" OnClick="nextBtn_Click" CssClass="defaultBtnAit questionBtn blue" text="Continue"/>
+                <asp:Button ID="skipBtn" runat="server" OnClick="nextBtn_Click" CssClass="defaultBtnAit questionBtn yellow" text="Skip Question"/>
             </div>
         </div>
     </div>

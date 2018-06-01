@@ -215,7 +215,6 @@
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="images\logo.png" />
     <Content Include="loginStaff.aspx" />
-    <Content Include="OptionItems.ascx" />
     <Content Include="question.aspx" />
     <Content Include="RadioType.ascx" />
     <Content Include="Register.aspx" />
@@ -422,13 +421,6 @@
       <DependentUpon>loginStaff.aspx</DependentUpon>
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
-    <Compile Include="OptionItems.ascx.cs">
-      <DependentUpon>OptionItems.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="OptionItems.ascx.designer.cs">
-      <DependentUpon>OptionItems.ascx</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="question.aspx.cs">
       <DependentUpon>question.aspx</DependentUpon>

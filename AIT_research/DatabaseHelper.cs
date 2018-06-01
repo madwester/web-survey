@@ -15,12 +15,20 @@ namespace AIT_research
         //static method return sql connection
         public static SqlConnection GetConnection()
         {
-            string connectionString = ConfigurationManager.ConnectionStrings["myConnectionString"].ConnectionString;
-            SqlConnection connection = new SqlConnection();
-            connection.ConnectionString = connectionString;
-            connection.Open();
+            try
+            {
+                string connectionString = ConfigurationManager.ConnectionStrings["myConnectionString"].ConnectionString;
+                SqlConnection connection = new SqlConnection();
+                connection.ConnectionString = connectionString;
+                connection.Open();
 
-            return connection;
+                return connection;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("System couldn't connect to database.");
+                return null;
+            }
         }
     }
 }
