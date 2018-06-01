@@ -15,13 +15,35 @@ namespace AIT_research
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            /*SqlConnection connection = DatabaseHelper.GetConnection();
-            SqlCommand command = new SqlCommand("SELECT * FROM [option] WHERE questionID = " + connection);
-            SqlDataReader reader = command.ExecuteReader();
+            const int genderQuestionId = 1;
+            const int ageQuestionId = 2;
+            const int stateQuestionId = 3;
+            const int bankQuestionId = 7;
+            const int newspaperQuestionId = 8;
 
-            ListItem optionItem = new ListItem(reader["value"].ToString());*/
+            List<ListItem> genderItem = new List<ListItem>();
+            genderItem = optionList(genderQuestionId);
+            foreach (ListItem item in genderItem)
+            {
+                genderList.Items.Add(item);
+            }
+
         }
+        public List<ListItem> optionList(int questionID)
+        {
+            List<ListItem> items = new List<ListItem>();
+            //getting connection from database helper class
+            SqlConnection connection = DatabaseHelper.GetConnection();
 
-        //variable for each question id
+            SqlCommand optionItemsCommand = new SqlCommand("SELECT * FROM [option] WHERE questionID = " + questionID, connection);
+            SqlDataReader optionItemsReader = optionItemsCommand.ExecuteReader();
+            while (optionItemsReader.Read())
+            {
+                ListItem optionItem = new ListItem(optionItemsReader["value"].ToString(), optionItemsReader["optionID"].ToString());
+                items.Add(optionItem);
+            }
+            connection.Close();
+            return items;
+        }
     }
 }
