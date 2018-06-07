@@ -4,7 +4,7 @@
     <div class="container-fluid searchDiv">
         <input type="button" id="showAll" class="longButton blue" value="show all respondants"/>
     <div id="showAllDiv" class="foldOutContainer" style="display:none">
-        hello
+       <asp:DataGrid ID="respondentsDataGrid" runat="server"></asp:DataGrid>
     </div>
         <input type="button" id="searchFor" class="longButton yellow" value="search for respondants"/>
     <div id="searchForDiv" class="container foldOutContainer" style="display:none">

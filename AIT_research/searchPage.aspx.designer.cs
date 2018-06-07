@@ -13,6 +13,15 @@ namespace AIT_research {
     public partial class searchPage {
         
         /// <summary>
+        /// respondentsDataGrid control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DataGrid respondentsDataGrid;
+        
+        /// <summary>
         /// genderList control.
         /// </summary>
         /// <remarks>

@@ -100,6 +100,24 @@ namespace AIT_research
                 interestList.Items.Add(item);
             }
         }
+
+        public List<ListItem> respondentsList()
+        {
+            List<ListItem> respondents = new List<ListItem>();
+
+            SqlConnection connection = DatabaseHelper.GetConnection();
+
+            SqlCommand respondentsCommand = new SqlCommand("SELECT * FROM respondents", connection);
+            SqlDataReader respondentsReader = respondentsCommand.ExecuteReader();
+            while (respondentsReader.Read())
+            {
+                ListItem respondentItem = new ListItem(respondentsReader["firstName"].ToString(), respondentsReader["lastName"].ToString());
+                respondents.Add(respondentItem);
+            }
+            connection.Close();
+            return respondents;
+        }
+
         public List<ListItem> optionList(int questionID)
         {
             try
