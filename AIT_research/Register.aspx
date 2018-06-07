@@ -22,7 +22,7 @@
                     Display = "Dynamic"
                     ErrorMessage="Please enter your last name"
                     ControlToValidate="lastnameTextbox"
-                    ForeColor="Red">
+                    ForeColor="#EB0144">
                 </asp:RequiredFieldValidator>
             </div>
             <!-- FIRST NAME -->
@@ -34,7 +34,7 @@
                     Display = "Dynamic" 
                     ErrorMessage="Please enter your first name"
                     ControlToValidate="firstnameTextbox"
-                    ForeColor="Red">
+                    ForeColor="#EB0144">
                 </asp:RequiredFieldValidator>
             </div>
         </div>
@@ -50,7 +50,7 @@
                     ErrorMessage="Date of birth must be beetween 2017 and 1900"
                     ControlToValidate="dobTextbox"
                     MaximumValue="01/01/2018" MinimumValue="01/01/1900"
-                    ForeColor="Red">
+                    ForeColor="#EB0144">
                 </asp:RequiredFieldValidator>
             </div>
         </div>
@@ -65,7 +65,7 @@
                     Type="Phone"
                     ErrorMessage="Please enter your phone number"
                     ControlToValidate="phoneTextbox"
-                    ForeColor="Red">
+                    ForeColor="#EB0144">
                 </asp:RequiredFieldValidator>
             </div>
         </div>

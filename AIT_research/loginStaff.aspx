@@ -15,7 +15,7 @@
                     ControlToValidate="usernameTextbox"
                     ForeColor="#EB0144">
             </asp:RequiredFieldValidator>
-            <asp:Textbox runat="server" CssClass="input" ID="passwordTextbox" placeholder="Password"></asp:Textbox>
+            <asp:Textbox runat="server" TextMode="Password" CssClass="input" ID="passwordTextbox" placeholder="Password"></asp:Textbox>
             <asp:RequiredFieldValidator ID="RequiredFieldValidator1"
                     runat="server"
                     Display = "Dynamic"
@@ -23,6 +23,7 @@
                     ControlToValidate="passwordTextbox"
                     ForeColor="#EB0144">
             </asp:RequiredFieldValidator>
+            <asp:Label runat="server" CssClass="errorMessage" ID="loginErrorLabel"></asp:Label>
             <asp:Button runat="server" CssClass="defaultBtnAit yellow" ID="loginBtn" Text="Sign in" OnClick="loginBtn_Click"/>
         </div>
             <a href="Default.aspx">Are you not a staff member and wanna go back to the home page? <u>Click here.</u></a>

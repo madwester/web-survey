@@ -450,6 +450,7 @@
     <Compile Include="searchPage.aspx.designer.cs">
       <DependentUpon>searchPage.aspx</DependentUpon>
     </Compile>
+    <Compile Include="SessionHelper.cs" />
     <Compile Include="Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

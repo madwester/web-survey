@@ -28,18 +28,19 @@ namespace AIT_research
 
             //connecting to db
             SqlConnection connection = DatabaseHelper.GetConnection();
-            SqlCommand command = new SqlCommand("SELECT COUNT(*) FROM staff WHERE username = " + username, connection);
+            SqlCommand command = new SqlCommand("SELECT COUNT(*) FROM staff WHERE username = '" + username + "'AND password = '" + password + "'", connection);
             int rowsaffected = (int)command.ExecuteScalar();
             if (rowsaffected > 0)
             {
-                //username exist
-
+                //username exist and password is corrent
+                SessionHelper.setUser(username);
+                Response.Redirect("searchPage.aspx");
             }
-
-
-            //if username exist in database, 
-            //check if user.passowrd == user.password
-
+            else
+            {
+                //username or password is incorrect
+                loginErrorLabel.Text = "Your username or password is invalid.";
+            }
         }
     }
 }

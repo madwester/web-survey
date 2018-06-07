@@ -75,6 +75,10 @@ h2 {
 .full {
     width: 100%;
 }
+.errorMessage {
+    color: #EB0144;
+    margin: 10px;
+}
 /*---------------------------
     NAVIGATION
 ---------------------------*/
