@@ -241,6 +241,7 @@ td {
 .registerDiv {
     margin: 100px 0;
     min-height: 700px;
+    height: 511px;
 }
 .registerLabel {
     margin: 0 0 10px 0;
