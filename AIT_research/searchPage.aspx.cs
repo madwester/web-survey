@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 //ADDED
 using System.Data.SqlClient;
 using System.Configuration;
+using System.Data;
 
 
 namespace AIT_research
@@ -99,23 +100,45 @@ namespace AIT_research
             {
                 interestList.Items.Add(item);
             }
-        }
 
-        public List<ListItem> respondentsList()
-        {
-            List<ListItem> respondents = new List<ListItem>();
-
+            //Creating a connection
             SqlConnection connection = DatabaseHelper.GetConnection();
 
-            SqlCommand respondentsCommand = new SqlCommand("SELECT * FROM respondents", connection);
-            SqlDataReader respondentsReader = respondentsCommand.ExecuteReader();
-            while (respondentsReader.Read())
+            //Creating a command to get correct data from DB
+            SqlCommand command = new SqlCommand("SELECT * FROM respondents", connection);
+
+            //Creating a reader to go through result
+            SqlDataReader reader = command.ExecuteReader();
+
+            //Creting a datatable to show data
+            DataTable datatable = new DataTable();
+
+            //creating columns for datatable
+            datatable.Columns.Add("firstName", typeof(String));
+            datatable.Columns.Add("lastName", typeof(String));
+            datatable.Columns.Add("dob", typeof(DateTime));
+            datatable.Columns.Add("date", typeof(DateTime));
+            datatable.Columns.Add("phone", typeof(String));
+
+            //cycle through the result, row by row
+            while (reader.Read())
             {
-                ListItem respondentItem = new ListItem(respondentsReader["firstName"].ToString(), respondentsReader["lastName"].ToString());
-                respondents.Add(respondentItem);
+                //Generating empty row for table
+                DataRow row = datatable.NewRow();
+                //Filling out the empty row with data result
+                row["firstName"] = reader["firstName"];
+                row["lastName"] = reader["lastName"];
+                row["dob"] = reader["dob"];
+                row["date"] = reader["date"];
+                row["phone"] = reader["phone"];
+                //adding row to datatable
+                datatable.Rows.Add(row);
             }
+            //showing data result in gridview
+            allRespGridView.DataSource = datatable;
+            allRespGridView.DataBind();
+
             connection.Close();
-            return respondents;
         }
 
         public List<ListItem> optionList(int questionID)
