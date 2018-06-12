@@ -92,8 +92,8 @@
                 <asp:CheckBoxList ID="travelList" runat="server"></asp:CheckBoxList>
             </div>
         </div>
-        <asp:Button ID="searchBtn" runat="server" CssClass="defaultBtnAit yellow full" text="Search"/>
-
+        <asp:Button ID="searchBtn" runat="server" OnClick="search_Click" CssClass="defaultBtnAit yellow full" text="Search"/>
+        <asp:GridView ID="searchResultGridView" runat="server"></asp:GridView>
     </div>
     </div>
     

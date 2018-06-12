@@ -141,6 +141,58 @@ namespace AIT_research
             connection.Close();
         }
 
+        //function to handle the searches of repsondents
+        protected void search_Click(object sender, EventArgs e)
+        {
+            //search result div:
+            string start = "(SELECT * FROM respondents";
+            string where = "WHERE respondentID IN(select respondentID from Answeres WHERE";
+            string options = "optionID = 10"
+                            + "OR optionID = " + item.selectedValue"
+                               + "OR optionID = 3"
+                               + "OR optionID = 5"
+            string end = ");";
+
+            //searchResultGridView = gridview ID
+
+            SqlConnection connection = DatabaseHelper.GetConnection();
+
+            SqlCommand command = start + where + options + end;
+
+            SqlDataReader reader = command.ExecuteReader();
+
+            //Creting a datatable to show data
+            DataTable datatable = new DataTable();
+
+            //creating columns for datatable
+            datatable.Columns.Add("firstName", typeof(String));
+            datatable.Columns.Add("lastName", typeof(String));
+            datatable.Columns.Add("dob", typeof(DateTime));
+            datatable.Columns.Add("date", typeof(DateTime));
+            datatable.Columns.Add("phone", typeof(String));
+
+            //cycle through the result, row by row
+            while (reader.Read())
+            {
+                //Generating empty row for table
+                DataRow row = datatable.NewRow();
+                //Filling out the empty row with data result
+                row["firstName"] = reader["firstName"];
+                row["lastName"] = reader["lastName"];
+                row["dob"] = reader["dob"];
+                row["date"] = reader["date"];
+                row["phone"] = reader["phone"];
+                //adding row to datatable
+                datatable.Rows.Add(row);
+            }
+            //showing data result in gridview
+            searchResultGridView.DataSource = datatable;
+            searchResultGridView.DataBind();
+
+            connection.Close();
+
+
+        }
         public List<ListItem> optionList(int questionID)
         {
             try
@@ -174,5 +226,7 @@ namespace AIT_research
                 return null;
             }
         }
+        
+
     }
 }
