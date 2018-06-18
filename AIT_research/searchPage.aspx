@@ -7,25 +7,7 @@
        <asp:GridView ID="allRespGridView" runat="server"></asp:GridView>
     </div>
         <input type="button" id="searchFor" class="longButton yellow" value="search for respondants"/>
-    <div id="searchForDiv" class="container foldOutContainer" style="display:none">
-   
-        <div class="row rowSearch">
-            <div class="col-md-4 col-sm-4 columnSearch">
-                <asp:Label runat="server" Text="Last Name">
-                </asp:Label>
-                <asp:TextBox runat="server" CssClass="searchInput"></asp:TextBox>
-            </div>
-            <div class="col-md-4 col-sm-4 columnSearch">
-                <asp:Label runat="server" Text="First Name">
-                </asp:Label>
-                <asp:TextBox runat="server" CssClass="searchInput"></asp:TextBox>
-            </div>
-            <div class="col-md-4 col-sm-4 columnSearch">
-                <asp:Label runat="server" Text="Email Name">
-                </asp:Label>
-                <asp:TextBox runat="server" CssClass="searchInput"></asp:TextBox>
-            </div>
-        </div>
+    <div id="searchForDiv" class="container foldOutContainer">
         <div class="row rowSearch">
             <div class="col-md-12 col-xs-12 columnSearch">
                 <asp:Label runat="server" Text="Gender"></asp:Label>
@@ -36,18 +18,6 @@
             <div class="col-md-12 col-xs-12 columnSearch">
                 <asp:Label runat="server" Text="Age range"></asp:Label>
                 <asp:CheckBoxList ID="ageList" runat="server"></asp:CheckBoxList>
-            </div>
-        </div>
-        <div class="row rowSearch">
-            <div class="col-md-4 col-sm-4 columnSearch">
-                <asp:Label runat="server" Text="Home Suburb">
-                </asp:Label>
-                <asp:TextBox runat="server" CssClass="searchInput"></asp:TextBox>
-            </div>
-            <div class="col-md-4 col-sm-4 columnSearch">
-                <asp:Label runat="server" Text="Home Postcode">
-                </asp:Label>
-                <asp:TextBox runat="server" CssClass="searchInput"></asp:TextBox>
             </div>
         </div>
         <div class="row rowSearch">
@@ -68,7 +38,7 @@
                 <asp:CheckBoxList ID="bankserviceList" runat="server"></asp:CheckBoxList>
             </div>
         </div>
-        <div class="row rowSearch">
+                <div class="row rowSearch">
             <div class="col-md-12 col-xs-12 columnSearch">
                 <asp:Label runat="server" Text="Newspaper Read"></asp:Label>
                 <asp:CheckBoxList ID="newspaperList" runat="server"></asp:CheckBoxList>
@@ -92,7 +62,7 @@
                 <asp:CheckBoxList ID="travelList" runat="server"></asp:CheckBoxList>
             </div>
         </div>
-        <asp:Button ID="searchBtn" runat="server" OnClick="search_Click" CssClass="defaultBtnAit yellow full" text="Search"/>
+        <asp:Button ID="searchBtn" runat="server" OnClick="search_Click" CssClass="defaultBtnAit full yellow" text="Search"/>
         <asp:GridView ID="searchResultGridView" runat="server"></asp:GridView>
     </div>
     </div>

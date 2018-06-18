@@ -1,4 +1,5 @@
 ﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -205,7 +206,7 @@ namespace AIT_research
                 }
 
                 //ok lets now try if its the radiotype question
-                RadioType radioTypeQuestion = (RadioType)questionPlaceholder.FindControl("radioTypeQuestion");
+                RadioType radioTypeQuestion = (RadioType)questionPlaceholder.FindControl("radioboxQuestionControl");
                 if (radioTypeQuestion != null)
                 {
                     //then its a radio question
@@ -213,11 +214,11 @@ namespace AIT_research
                     //cycle though radiotype questions
                     foreach (ListItem item in radioTypeQuestion.RadioList.Items)
                     {
-                        //creating an option id of the value of item
-                        int optionID = Int32.Parse(item.Value);
-
                         if (item.Selected)
                         {
+                            //creating an option id of the value of item
+                            int optionID = Int32.Parse(item.Value);
+
                             //creating a new answer based on answer class
                             Answer a = new Answer();
                             a.questionID = GetCurrentQuestionNumber();

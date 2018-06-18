@@ -80,20 +80,73 @@ namespace AIT_research
         //button when user choose to be anonymous
         protected void continueAnonymousBtn_Click(object sender, EventArgs e)
         {
-            //getting the ip address of the user
-            string respondentIpAddress = GetIPAddress();
+            try {
+                //getting the ip address of the user
+                string respondentIpAddress = GetIPAddress();
 
-            //creating a connection
-            SqlConnection connection = DatabaseHelper.GetConnection();
+                //creating a connection
+                SqlConnection connection = DatabaseHelper.GetConnection();
 
-            //creating a string of the current time
-            String currentTime = System.DateTime.Now.ToString("s");
-            
-            if (HttpContext.Current.Session["respondentSessionID"] == null)
+                //creating a string of the current time
+                String currentTime = System.DateTime.Now.ToString("s");
+
+                if (HttpContext.Current.Session["respondentSessionID"] == null)
+                {
+                    //inserting registration data to db
+                    SqlCommand command = new SqlCommand("INSERT INTO respondents (firstName, lastName, date, ipAddress)" +
+                                                        " VALUES ('anonymous', 'anonymous', '" + currentTime + "', '" + respondentIpAddress + "');SELECT CAST(scope_identity() AS int)", connection);
+                    int newRespondentSessionID = (int)command.ExecuteScalar();
+                    HttpContext.Current.Session["respondentSessionID"] = newRespondentSessionID;
+
+                    //store answers into db
+                    List<Answer> answers = question.getListOfAnswerFromSession();
+                    foreach (Answer a in answers)
+                    {
+                        //inserting answers to database
+                        //answerID solves itself
+                        SqlCommand insertAnswerCommand = new SqlCommand("INSERT INTO answer (questionID, respondentID, text, optionID)" +
+                                                                        " VALUES ('" + a.questionID + "', '" + newRespondentSessionID + "', '" + a.answerText + "', '" + a.optionID + "' );", connection);
+                        int rowsaffected = insertAnswerCommand.ExecuteNonQuery();
+                        if (rowsaffected <= 0)
+                        {
+                            //no answers were being inserted
+                        }
+                    }
+                    //empty list of answers in the session as they are stored in DB by this stage
+                    HttpContext.Current.Session["answers"] = null;
+                    //end of survey so redirecting user to thank you page
+                    Response.Redirect("Thankyou.aspx");
+                    //closing connection
+                    connection.Close();
+                }
+            }
+            catch (Exception ex)
             {
-                //inserting registration data to db
-                SqlCommand command = new SqlCommand("INSERT INTO respondents (firstName, lastName, date, ipAddress)" +
-                                                    " VALUES ('anonymous', 'anonymous', '" + currentTime + "', '" + respondentIpAddress + "');SELECT CAST(scope_identity() AS int)", connection);
+                Console.WriteLine("Could not continue with anonymous user");
+            }
+        }
+        protected void RegisterBtn_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                //if(Page.isValid){}
+                //getting the ip address of the user
+                string respondentIpAddress = GetIPAddress();
+
+                //connecting to db
+                SqlConnection connection = DatabaseHelper.GetConnection();
+
+                //creating a string of the current time
+                String currentTime = System.DateTime.Now.ToString("s");
+
+                string lastname = lastnameTextbox.Text;
+                string firstname = firstnameTextbox.Text;
+                DateTime dob = DateTime.Parse(dobTextbox.Text);
+                string phone = phoneTextbox.Text;
+
+                //inserting data to db
+                SqlCommand command = new SqlCommand("INSERT INTO respondents (firstName, lastName, date, ipAddress, dob, phone)" +
+                                                    " VALUES ('" + firstname + "', '" + lastname + "', '" + currentTime + "', '" + respondentIpAddress + "', '" + dob.ToString("s") + "', '" + phone + "');SELECT CAST(scope_identity() AS int)", connection);
                 int newRespondentSessionID = (int)command.ExecuteScalar();
                 HttpContext.Current.Session["respondentSessionID"] = newRespondentSessionID;
 
@@ -118,50 +171,10 @@ namespace AIT_research
                 //closing connection
                 connection.Close();
             }
-        }
-        protected void RegisterBtn_Click(object sender, EventArgs e)
-        {
-            //if(Page.isValid){}
-            //getting the ip address of the user
-            string respondentIpAddress = GetIPAddress();
-
-            //connecting to db
-            SqlConnection connection = DatabaseHelper.GetConnection();
-
-            //creating a string of the current time
-            String currentTime = System.DateTime.Now.ToString("s");
-
-            string lastname = lastnameTextbox.Text;
-            string firstname = firstnameTextbox.Text;
-            DateTime dob = DateTime.Parse(dobTextbox.Text);
-            string phone = phoneTextbox.Text;
-
-            //inserting data to db
-            SqlCommand command = new SqlCommand("INSERT INTO respondents (firstName, lastName, date, ipAddress, dob, phone)" +
-                                                " VALUES ('" + firstname +"', '" + lastname +"', '" + currentTime + "', '" + respondentIpAddress + "', '" + dob.ToString("s") + "', '" + phone + "');SELECT CAST(scope_identity() AS int)", connection);
-            int newRespondentSessionID = (int)command.ExecuteScalar();
-            HttpContext.Current.Session["respondentSessionID"] = newRespondentSessionID;
-
-            //store answers into db
-            List<Answer> answers = question.getListOfAnswerFromSession();
-            foreach (Answer a in answers)
+            catch (Exception ex)
             {
-                //inserting answers to database
-                //answerID solves itself
-                SqlCommand insertAnswerCommand = new SqlCommand("INSERT INTO answer (questionID, respondentID, text, optionID)" +
-                                                                " VALUES ('" + a.questionID + "', '" + newRespondentSessionID + "', '" + a.answerText + "', '" + a.optionID + "' );", connection);
-                int rowsaffected = insertAnswerCommand.ExecuteNonQuery();
-                if (rowsaffected <= 0)
-                {
-                    //no answers were being inserted
-                }
+                Console.WriteLine("Could not continue and register respondent");
             }
-            //empty list of answers in the session as they are stored in DB by this stage
-            HttpContext.Current.Session["answers"] = null;
-            //end of survey so redirecting user to thank you page
-            Response.Redirect("Thankyou.aspx");
-            //closing connection
-            connection.Close();
         }
     }
 }

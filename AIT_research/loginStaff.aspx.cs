@@ -19,27 +19,33 @@ namespace AIT_research
 
         protected void loginBtn_Click(object sender, EventArgs e)
         {
-            //INPUT IDS
-            //usernameTextbox
-            //passwordTextbox
-
+            //creating login inputs from user to variables
             string username = usernameTextbox.Text;
             string password = passwordTextbox.Text;
 
-            //connecting to db
-            SqlConnection connection = DatabaseHelper.GetConnection();
-            SqlCommand command = new SqlCommand("SELECT COUNT(*) FROM staff WHERE username = '" + username + "'AND password = '" + password + "'", connection);
-            int rowsaffected = (int)command.ExecuteScalar();
-            if (rowsaffected > 0)
+            try
             {
-                //username exist and password is corrent
-                SessionHelper.setUser(username);
-                Response.Redirect("searchPage.aspx");
+                //connecting to db
+                SqlConnection connection = DatabaseHelper.GetConnection();
+                //checking in db if user exist and if password is correct with that user
+                SqlCommand command = new SqlCommand("SELECT COUNT(*) FROM staff WHERE username = '" + username + "'AND password = '" + password + "'", connection);
+                int rowsaffected = (int)command.ExecuteScalar();
+                //if the command passes rowsaffected will be more than 0
+                if (rowsaffected > 0)
+                {
+                    //username exist and password is corrent
+                    SessionHelper.setUser(username);
+                    Response.Redirect("searchPage.aspx");
+                }
+                else
+                {
+                    //username or password is incorrect
+                    loginErrorLabel.Text = "Your username or password is invalid.";
+                }
             }
-            else
+            catch (Exception ex)
             {
-                //username or password is incorrect
-                loginErrorLabel.Text = "Your username or password is invalid.";
+                Console.WriteLine("Could not continue log in staff..");
             }
         }
     }
